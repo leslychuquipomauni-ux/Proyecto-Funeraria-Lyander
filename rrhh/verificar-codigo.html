@@ -4,38 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificar Código | RRHH</title>
+    
+    <!-- Bootstrap 5 y Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
-        body { background-color: #222725; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: 'Segoe UI', sans-serif;}
-        .card-box { background-color: white; padding: 40px 30px; border-radius: 16px; width: 100%; max-width: 400px; }
-        .btn-verde { background-color: #2D6A4F; color: white; border: none; padding: 12px; border-radius: 50px; width: 100%; margin-top: 10px; font-weight: 600; transition: all 0.3s; }
-        .btn-verde:hover { background-color: #1B4332; color: white; }
-        .back-link { color: #6c757d; text-decoration: none; font-size: 0.95rem; font-weight: 500;}
-        .back-link:hover { color: #2D6A4F; }
+        :root {
+            --verde-primario: #2D6A4F;
+            --verde-oscuro: #1B4332;
+            --fondo-gris: #222725;
+            --verde-texto: #52B788;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #3a4440, var(--fondo-gris));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .login-wrapper {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--verde-texto), var(--verde-primario));
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #6c757d;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 25px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--verde-primario);
+        }
+
+        .brand-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .brand-title {
+            font-weight: 800;
+            color: #121212;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .instruction-text {
+            color: #6c757d;
+            font-size: 0.95rem;
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Input de código centrado y grande */
+        .code-input {
+            letter-spacing: 12px;
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            border: 2px solid #EAEAEA;
+            border-radius: 12px;
+            background-color: #FAFCFB;
+            color: var(--verde-oscuro);
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .code-input:focus {
+            border-color: var(--verde-primario);
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
+            outline: none;
+            background-color: #FFFFFF;
+        }
+
+        .btn-verde {
+            background: linear-gradient(135deg, var(--verde-primario), var(--verde-oscuro));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 8px 20px rgba(27, 67, 50, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-verde:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(27, 67, 50, 0.4);
+            color: white;
+        }
+
+        .resend-text {
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .resend-link {
+            color: var(--verde-primario);
+            text-decoration: none;
+            font-weight: 700;
+        }
     </style>
 </head>
 <body>
-    <div class="card-box text-center position-relative">
-        
-        <!-- Botón de regresar del mockup -->
-        <div class="text-start mb-4">
-            <a href="recuperar-password.html" class="back-link">
-                <i class="bi bi-chevron-left"></i> &lt; Regresar
-            </a>
+
+    <div class="login-wrapper">
+        <!-- Enlace Regresar -->
+        <a href="recuperar-password.html" class="back-link">
+            <i class="bi bi-chevron-left me-1"></i> Regresar
+        </a>
+
+        <div class="brand-header">
+            <h2 class="brand-title">Verificación de código</h2> <!-- -->
+            <p class="instruction-text">
+                Por favor, ingrese el código de verificación de 6 dígitos enviado a su correo institucional. <!-- -->
+            </p>
         </div>
 
-        <h3 class="fw-bold mb-3">Verificación de código</h3>
-        <p class="text-secondary small mb-4">Por favor, ingrese el código de verificación de 6 dígitos que hemos enviado a su correo electrónico.</p>
-        
-        <!-- Formulario que en el futuro llevará a crear nueva contraseña -->
-        <form action="dashboard-rrhh.html">
-            <input type="text" class="form-control mb-4 p-3 bg-light text-center fs-4 fw-bold" placeholder="------" maxlength="6" required style="letter-spacing: 5px;">
-            <button type="submit" class="btn-verde">Confirmar</button>
+        <form id="form-verificar">
+            <div class="mb-4">
+                <input type="text" class="form-control code-input" id="codigo" placeholder="000000" maxlength="6" pattern="\d{6}" required>
+            </div>
+
+            <button type="submit" class="btn-verde">
+                Confirmar <i class="bi bi-check-circle ms-2"></i> <!-- -->
+            </button>
         </form>
 
-        <p class="mt-4 mb-0 small text-secondary">
-            ¿No recibió el código? <a href="#" style="color: #2D6A4F; font-weight: 500; text-decoration: none;">Reenviar en 00:30</a>
-        </p>
+        <div class="text-center resend-text">
+            ¿No recibió el código? <br>
+            <a href="#" class="resend-link">Reenviar código en 00:45</a> <!-- -->
+        </div>
     </div>
+
+    <script>
+    document.getElementById('form-verificar').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const codigo = document.getElementById('codigo').value;
+    
+    // Simulación: El código correcto es 123456
+    if (codigo === "123456") {
+        window.location.href = 'restablecer-password.html';
+    } else {
+        // Si el código no es 123456, muestra este error
+        alert("Código de verificación inválido o expirado. Por favor, intente nuevamente.");
+    }
+});
+    </script>
+
 </body>
 </html>

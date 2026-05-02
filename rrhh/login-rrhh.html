@@ -5,121 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal RRHH | Protección Familiar</title>
     
-    <!-- Bootstrap y Iconos -->
+    <!-- Bootstrap 5 y Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    
     <style>
         :root {
-            /* Variables exactas de tu diseño original */
-            --verde-primario: #2D6A4F; 
-            --verde-oscuro: #1B4332;   
-            --fondo-gris: #222725;     
-            --verde-texto: #52B788; 
+            /* Tu paleta de colores oficial */
+            --verde-primario: #2D6A4F;
+            --verde-oscuro: #1B4332;
+            --fondo-gris: #222725;
+            --verde-texto: #52B788;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--fondo-gris) !important;
-            height: 100vh;
+            /* Fondo elegante con un sutil degradado radial para darle profundidad */
+            background: radial-gradient(circle at top right, #3a4440, var(--fondo-gris));
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            color: #F8F9FA !important;
+            padding: 20px;
         }
 
-        /* La tarjeta blanca (regla de protección de tu diseño) */
-        .card-login {
-            background-color: #FFFFFF !important;
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        /* Tarjeta de login premium */
+        .login-wrapper {
+            background: #ffffff;
             width: 100%;
-            max-width: 400px;
-            padding: 40px 30px;
-            color: #121212 !important;
+            max-width: 450px;
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); /* Sombra más profunda y elegante */
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Encabezado del logo */
+        /* Barra decorativa superior en la tarjeta */
+        .login-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--verde-texto), var(--verde-primario));
+        }
+
         .brand-header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
 
-        .brand-header h2 {
-            font-weight: bold;
-            color: #121212;
+        .brand-icon {
+            font-size: 3.5rem;
+            color: var(--verde-primario);
+            line-height: 1;
             margin-bottom: 5px;
+            display: inline-block;
+            filter: drop-shadow(0 4px 6px rgba(45, 106, 79, 0.2));
         }
 
-        .text-verde {
-            color: var(--verde-primario) !important;
+        .brand-title {
+            font-weight: 800;
+            color: #121212;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
         }
 
         .badge-rrhh {
-            background-color: var(--verde-primario);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: bold;
+            background-color: #e8f5e9;
+            color: var(--verde-oscuro);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
             letter-spacing: 1px;
-            text-transform: uppercase;
+            border: 1px solid rgba(45, 106, 79, 0.2);
         }
 
-        .form-title {
-            font-size: 1.4rem;
+        h3.form-title {
+            font-size: 1.3rem;
             font-weight: 600;
+            color: #4a5550;
             margin-bottom: 25px;
             text-align: center;
-            color: #121212;
         }
 
-        .form-label {
-            font-weight: 500;
-            color: #6c757d;
-            font-size: 0.95rem;
+        /* Inputs Flotantes Estilo App Moderna */
+        .form-floating > .form-control {
+            border: 2px solid #EAEAEA;
+            border-radius: 12px;
+            background-color: #FAFCFB;
+            transition: all 0.3s ease;
+            height: calc(3.5rem + 5px);
         }
 
-        .form-control {
-            border: 1px solid #EAEAEA;
-            border-radius: 8px;
-            padding: 12px 15px;
-            background-color: #F8F9FA;
-        }
-
-        .form-control:focus {
+        .form-floating > .form-control:focus {
             border-color: var(--verde-primario);
-            box-shadow: 0 0 0 0.25rem rgba(45, 106, 79, 0.25);
+            box-shadow: 0 0 0 4px rgba(45, 106, 79, 0.1);
             background-color: #FFFFFF;
         }
 
-        /* Botón estilo original de tu página */
+        .form-floating > label {
+            color: #6c757d;
+            font-weight: 500;
+            padding-left: 15px;
+        }
+
+        .input-icon {
+            color: var(--verde-primario);
+            margin-right: 8px;
+        }
+
+        /* Botón con degradado y sombra dinámica */
         .btn-verde {
-            background-color: var(--verde-primario);
+            background: linear-gradient(135deg, var(--verde-primario), var(--verde-oscuro));
             color: white;
-            border-radius: 50px;
-            padding: 12px 32px;
-            font-weight: 600;
             border: none;
-            transition: all 0.3s ease;
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
             width: 100%;
             margin-top: 15px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 20px rgba(27, 67, 50, 0.25);
+            transition: all 0.3s ease;
         }
 
         .btn-verde:hover {
-            background-color: var(--verde-oscuro);
+            transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+            box-shadow: 0 12px 25px rgba(27, 67, 50, 0.4);
             color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(27, 67, 50, 0.5);
         }
 
         .forgot-link {
             color: var(--verde-primario);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.3s;
         }
 
         .forgot-link:hover {
@@ -130,35 +158,42 @@
 </head>
 <body>
 
-    <div class="card-login">
-        
-        <!-- Logo y Área (Estilo extraído de tu navbar) -->
+    <div class="login-wrapper">
+        <!-- Encabezado de la marca -->
         <div class="brand-header">
-            <i class="bi bi-shield-check text-verde fs-1"></i>
-            <h2 class="h3">Protección<span class="text-verde">Familiar</span></h2>
-            <span class="badge-rrhh">Portal RRHH</span>
+            <i class="bi bi-shield-check brand-icon"></i>
+            <h2 class="brand-title">Protección<span style="color: var(--verde-primario);">Familiar</span></h2>
+            <div class="mt-2">
+                <span class="badge-rrhh"><i class="bi bi-person-badge me-1"></i>PORTAL RRHH</span>
+            </div>
         </div>
 
-        <!-- Textos exactos del Mockup PDF -->
-        <h3 class="form-title">Iniciar sesión</h3>
+        <h3 class="form-title">Iniciar sesión</h3> <!--[cite: 3] -->
 
-<form action="dashboard-rrhh.html"></form>            
-            <div class="mb-3">
-                <label for="rut" class="form-label">Correo/RUT</label>
-                <input type="text" class="form-control" id="rut" placeholder="Usuario@Correo.com" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" placeholder="••••••••" required>
-            </div>
-
-            <div class="mb-3 text-end">
-                <a href="recuperar-password.html" class="forgot-link">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <button type="submit" class="btn-verde">Acceder</button>
+        <!-- Formulario configurado SIN método POST para que funcione el enlace al dashboard -->
+        <form action="dashboard-rrhh.html">
             
+            <!-- Input Flotante 1: Correo/RUT -->
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control" id="rut" placeholder="Usuario@Correo.com" required> <!--[cite: 3] -->
+                <label for="rut"><i class="bi bi-envelope-at input-icon"></i>Correo / RUT</label> <!--[cite: 3] -->
+            </div>
+
+            <!-- Input Flotante 2: Contraseña -->
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="password" placeholder="Contraseña" required> <!--[cite: 3] -->
+                <label for="password"><i class="bi bi-shield-lock input-icon"></i>Contraseña</label> <!--[cite: 3] -->
+            </div>
+
+            <!-- Enlace Recuperar -->
+            <div class="d-flex justify-content-end mb-4">
+                <a href="recuperar-password.html" class="forgot-link">¿Olvidaste tu contraseña?</a> <!--[cite: 3] -->
+            </div>
+
+            <!-- Botón Acceder -->
+            <button type="submit" class="btn-verde">
+                Acceder <i class="bi bi-box-arrow-in-right ms-2"></i> <!--[cite: 3] -->
+            </button>
         </form>
     </div>
 

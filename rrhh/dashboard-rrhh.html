@@ -3,17 +3,292 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Interno | RRHH</title>
+    <title>Panel Empleado | Protección Familiar</title>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --verde-primario: #2D6A4F;
+            --verde-oscuro: #1B4332;
+            --fondo-gris: #222725;
+            --fondo-app: #F8FAF9;
+            --verde-suave: #E8F5E9;
+        }
+
+        body {
+            background-color: var(--fondo-app);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            display: flex;
+        }
+
+        /* SIDEBAR PREMIUM */
+        .sidebar {
+            width: 100px;
+            background-color: #FFFFFF;
+            height: 100vh;
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 0;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.03);
+            z-index: 1000;
+        }
+
+        .sidebar-brand {
+            color: var(--verde-primario);
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            width: 100%;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #A0AEC0;
+            font-size: 1.6rem;
+            transition: 0.3s;
+            position: relative;
+            padding: 10px;
+            border-radius: 15px;
+            text-decoration: none;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--verde-primario);
+            background-color: var(--verde-suave);
+        }
+
+        /* MAIN CONTENT */
+        .content {
+            margin-left: 100px;
+            width: calc(100% - 100px);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--verde-primario);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* DASHBOARD GRID */
+        .container-fluid { padding: 40px; }
+
+        .welcome-card {
+            background: linear-gradient(135deg, var(--verde-primario) 0%, var(--verde-oscuro) 100%);
+            border-radius: 24px;
+            padding: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .welcome-card h1 { font-weight: 700; font-size: 2.2rem; }
+
+        .glass-card {
+            background: white;
+            border-radius: 20px;
+            border: none;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            height: 100%;
+            transition: 0.3s;
+        }
+
+        .glass-card:hover { transform: translateY(-5px); }
+
+        .stat-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--verde-suave);
+            color: var(--verde-primario);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .btn-action {
+            background: var(--verde-primario);
+            color: white;
+            border-radius: 12px;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .btn-action:hover { background: var(--verde-oscuro); color: white; }
+
+        .section-title {
+            font-weight: 700;
+            color: #2D3748;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 </head>
-<body style="background-color: #222725; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: 'Segoe UI', sans-serif;">
-    <div class="text-center">
-        <h1 class="fw-bold text-success mb-3">¡Acceso Concedido!</h1>
-        <h3 class="mb-4">Bienvenida al Portal de Recursos Humanos</h3>
-        <p class="text-light opacity-75 mb-5">Aquí se construirán las opciones para ver nóminas, vacaciones y empleados.</p>
-        
-        <!-- Este botón te devuelve al login -->
-        <a href="login-rrhh.html" class="btn btn-outline-light rounded-pill px-4">Cerrar Sesión</a>
+<body>
+
+    <!-- SIDEBAR BASADO EN MOCKUP -->
+    <div class="sidebar">
+        <div class="sidebar-brand"><i class="bi bi-shield-check"></i></div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" title="Inicio"><i class="bi bi-grid-1x2-fill"></i></a>
+            <a href="#" class="nav-item" title="Solicitudes"><i class="bi bi-chat-left-text"></i></a>
+            <a href="#" class="nav-item" title="Calendario"><i class="bi bi-calendar3"></i></a>
+            <a href="#" class="nav-item" title="Comunidad"><i class="bi bi-people"></i></a>
+            <a href="#" class="nav-item" title="Documentos"><i class="bi bi-folder2-open"></i></a>
+            <a href="#" class="nav-item" title="Configuración"><i class="bi bi-gear"></i></a>
+        </nav>
+        <a href="login-rrhh.html" class="nav-item mt-auto text-danger" title="Salir"><i class="bi bi-box-arrow-left"></i></a>
     </div>
+
+    <!-- CONTENIDO -->
+    <div class="content">
+        <header class="header">
+            <div>
+                <h4 class="mb-0 fw-bold">Inicio</h4>
+                <small class="text-muted">Panel Administrativo RRHH</small>
+            </div>
+            <div class="profile-section">
+                <div class="text-end">
+                    <p class="mb-0 fw-bold">Alejandro Ramírez</p> <!-- -->
+                    <small class="text-success">Vendedor</small> <!-- -->
+                </div>
+                <div class="avatar">AR</div>
+            </div>
+        </header>
+
+        <div class="container-fluid">
+            <!-- BANNER BIENVENIDA[cite: 3] -->
+            <div class="welcome-card">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1>¡Hola, Alejandro!</h1>
+                        <p class="opacity-75 fs-5">Bienvenido al portal de Empleado. Tienes 2 solicitudes pendientes de revisión.</p>
+                    </div>
+                    <div class="col-md-4 text-center d-none d-md-block">
+                        <i class="bi bi-person-workspace" style="font-size: 6rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- RESUMEN EMPLEADO -->
+                <div class="col-lg-8">
+                    <h5 class="section-title"><i class="bi bi-bar-chart-line text-success"></i> Resumen empleado</h5>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="glass-card">
+                                <div class="stat-circle">2,88</div> <!--[cite: 4] -->
+                                <h6 class="fw-bold">Vacaciones</h6>
+                                <p class="text-muted small">Días proporcionales acumulados.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="glass-card">
+                                <div class="stat-circle">0</div> <!--[cite: 4] -->
+                                <h6 class="fw-bold">Administrativos</h6>
+                                <p class="text-muted small">Días disponibles este año.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="glass-card">
+                                <i class="bi bi-check2-circle fs-1 text-success mb-2 d-block"></i>
+                                <h6 class="fw-bold">Contrato</h6>
+                                <p class="text-muted small">Tipo: Contrato Fijo.</p> <!--[cite: 4] -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN DOCUMENTOS[cite: 3, 4] -->
+                    <h5 class="section-title mt-5"><i class="bi bi-file-earmark-pdf text-danger"></i> Últimos Documentos</h5>
+                    <div class="glass-card">
+                        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Liquidación Marzo 2026</h6>
+                                <small class="text-muted">Emitido el 02/04/2026</small>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-success rounded-pill px-3">Descargar</a>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Certificado de Antigüedad</h6>
+                                <small class="text-muted">Documento solicitado</small>
+                            </div>
+                            <a href="#" class="btn btn-sm btn-outline-success rounded-pill px-3">Ver Ficha</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIDEBAR DERECHO: COMUNIDAD[cite: 3, 4] -->
+                <div class="col-lg-4">
+                    <h5 class="section-title"><i class="bi bi-balloon-heart text-warning"></i> Comunidad</h5>
+                    <div class="glass-card mb-4">
+                        <p class="fw-bold mb-3">Cumpleaños del Mes</p>
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <div class="avatar bg-info" style="width: 35px; height: 35px;">MS</div>
+                            <div>
+                                <p class="mb-0 small fw-bold">Marta Sánchez</p> <!--[cite: 4] -->
+                                <small class="text-muted">Recepcionista • Hoy</small>
+                            </div>
+                            <button class="btn btn-sm btn-verde ms-auto"><i class="bi bi-send"></i></button>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="avatar bg-warning" style="width: 35px; height: 35px;">JM</div>
+                            <div>
+                                <p class="mb-0 small fw-bold">Joel Miller</p> <!--[cite: 4] -->
+                                <small class="text-muted">Gerente • En 6 días</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="section-title"><i class="bi bi-headset text-primary"></i> Soporte Interno</h5>
+                    <div class="glass-card" style="background: var(--verde-suave);">
+                        <p class="small">¿Necesitas ayuda con tus liquidaciones o permisos?</p>
+                        <a href="#" class="btn-action w-100 text-center">Crear Solicitud</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
