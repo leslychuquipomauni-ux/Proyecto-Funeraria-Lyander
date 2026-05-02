@@ -11,7 +11,6 @@
     
     <style>
         :root {
-            /* Tu paleta de colores oficial */
             --verde-primario: #2D6A4F;
             --verde-oscuro: #1B4332;
             --fondo-gris: #222725;
@@ -19,7 +18,6 @@
         }
 
         body {
-            /* Fondo elegante con un sutil degradado radial para darle profundidad */
             background: radial-gradient(circle at top right, #3a4440, var(--fondo-gris));
             min-height: 100vh;
             display: flex;
@@ -30,19 +28,17 @@
             padding: 20px;
         }
 
-        /* Tarjeta de login premium */
         .login-wrapper {
             background: #ffffff;
             width: 100%;
             max-width: 450px;
             border-radius: 24px;
             padding: 50px 40px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); /* Sombra más profunda y elegante */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
             position: relative;
             overflow: hidden;
         }
 
-        /* Barra decorativa superior en la tarjeta */
         .login-wrapper::before {
             content: '';
             position: absolute;
@@ -94,7 +90,6 @@
             text-align: center;
         }
 
-        /* Inputs Flotantes Estilo App Moderna */
         .form-floating > .form-control {
             border: 2px solid #EAEAEA;
             border-radius: 12px;
@@ -120,7 +115,6 @@
             margin-right: 8px;
         }
 
-        /* Botón con degradado y sombra dinámica */
         .btn-verde {
             background: linear-gradient(135deg, var(--verde-primario), var(--verde-oscuro));
             color: white;
@@ -137,7 +131,7 @@
         }
 
         .btn-verde:hover {
-            transform: translateY(-3px); /* Efecto de elevación al pasar el mouse */
+            transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(27, 67, 50, 0.4);
             color: white;
         }
@@ -159,7 +153,6 @@
 <body>
 
     <div class="login-wrapper">
-        <!-- Encabezado de la marca -->
         <div class="brand-header">
             <i class="bi bi-shield-check brand-icon"></i>
             <h2 class="brand-title">Protección<span style="color: var(--verde-primario);">Familiar</span></h2>
@@ -168,49 +161,48 @@
             </div>
         </div>
 
-        <h3 class="form-title">Iniciar sesión</h3> <!--[cite: 3] -->
+        <h3 class="form-title">Iniciar sesión</h3>
 
-        <!-- Formulario configurado SIN método POST para que funcione el enlace al dashboard -->
-        <form action="dashboard-rrhh.html">
+        <!-- Ajuste: Se añade id="form-login-empleado" y se quita el action para que mande el script -->
+        <form id="form-login-empleado">
             
-            <!-- Input Flotante 1: Correo/RUT -->
             <div class="form-floating mb-4">
-                <input type="text" class="form-control" id="rut" placeholder="Usuario@Correo.com" required> <!--[cite: 3] -->
-                <label for="rut"><i class="bi bi-envelope-at input-icon"></i>Correo / RUT</label> <!--[cite: 3] -->
+                <!-- Ajuste: id="email-empleado" para coincidir con el script -->
+                <input type="email" class="form-control" id="email-empleado" placeholder="Usuario@Correo.com" required>
+                <label for="email-empleado"><i class="bi bi-envelope-at input-icon"></i>Correo / RUT</label>
             </div>
 
-            <!-- Input Flotante 2: Contraseña -->
             <div class="form-floating mb-3">
-                <input type="password" class="form-control" id="password" placeholder="Contraseña" required> <!--[cite: 3] -->
-                <label for="password"><i class="bi bi-shield-lock input-icon"></i>Contraseña</label> <!--[cite: 3] -->
+                <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                <label for="password"><i class="bi bi-shield-lock input-icon"></i>Contraseña</label>
             </div>
 
-            <!-- Enlace Recuperar -->
             <div class="d-flex justify-content-end mb-4">
-                <a href="recuperar-password.html" class="forgot-link">¿Olvidaste tu contraseña?</a> <!--[cite: 3] -->
+                <a href="recuperar-password.html" class="forgot-link">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <!-- Botón Acceder -->
             <button type="submit" class="btn-verde">
-                Acceder <i class="bi bi-box-arrow-in-right ms-2"></i> <!--[cite: 3] -->
+                Acceder <i class="bi bi-box-arrow-in-right ms-2"></i>
             </button>
         </form>
     </div>
+
     <script>
         document.getElementById('form-login-empleado').addEventListener('submit', function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Evita que la página se recargue sola
+            
             const email = document.getElementById('email-empleado').value.toLowerCase();
             
-            // Si es empleado de la empresa
+            // 1. Si el correo termina en @funeraria.cl -> Va al Dashboard de RRHH
             if (email.endsWith('@funeraria.cl')) {
                 window.location.href = 'dashboard-rrhh.html';
             } 
-            // Si es un cliente con correo personal
+            // 2. Si el correo es personal (@gmail, @outlook, @hotmail) -> Va al Dashboard de Clientes
             else if (email.endsWith('@gmail.com') || email.endsWith('@outlook.com') || email.endsWith('@hotmail.com')) {
-                alert("Detectamos un correo personal. Redirigiéndote al Portal de Clientes...");
-                // Esto te saca de la carpeta rrhh y te lleva a la de clientes
+                alert("¡Bienvenida! Detectamos un correo personal. Redirigiéndote al Portal de Clientes...");
                 window.location.href = '../clientes/dashboard-cliente.html';
             } 
+            // 3. Cualquier otro caso
             else {
                 alert("Por favor, ingresa un correo válido (@funeraria.cl o @gmail/@outlook).");
             }
