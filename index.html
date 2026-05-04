@@ -2,10 +2,158 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!-- Este es el truco mágico que te teletransporta a la carpeta rrhh al instante -->
-    <meta http-equiv="refresh" content="0; url=rrhh/login-rrhh.html">
-    <title>Cargando Portal...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso | Protección Familiar</title>
+    
+    <!-- Bootstrap 5, Icons y SweetAlert2 para los Pop-ups -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <style>
+        :root {
+            --verde-primario: #2D6A4F;
+            --verde-oscuro: #1B4332;
+            --fondo: #222725;
+        }
+
+        body {
+            background: radial-gradient(circle at top right, #3a4440, var(--fondo));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-top: 6px solid var(--verde-primario);
+            transition: all 0.3s ease;
+        }
+
+        /* Indicador de Portal dinámico */
+        .portal-indicator {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            padding: 12px;
+            border: 2px solid #f0f2f1;
+        }
+
+        .btn-principal {
+            background: linear-gradient(135deg, var(--verde-primario), var(--verde-oscuro));
+            color: white; border: none; border-radius: 12px;
+            padding: 14px; font-weight: 700; width: 100%;
+            margin-top: 20px; transition: 0.3s;
+        }
+
+        .btn-principal:hover { transform: translateY(-3px); color: white; }
+    </style>
 </head>
 <body>
+
+    <div class="login-card">
+        <div class="text-center">
+            <!-- Indicador dinámico de tipo de cuenta -->
+            <div id="badge-portal" class="portal-indicator bg-light text-muted">
+                IDENTIFICANDO PORTAL...
+            </div>
+            
+            <h2 class="fw-bold">Protección<span style="color: var(--verde-primario);">Familiar</span></h2>
+            <p class="text-secondary small mb-4">Ingrese sus credenciales corporativas o personales</p>
+        </div>
+
+        <form id="unified-login">
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Correo Electrónico</label>
+                <input type="email" id="email" class="form-control" placeholder="nombre@ejemplo.com" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label small fw-bold">Contraseña</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <a href="rrhh/recuperar-password.html" class="text-decoration-none small fw-bold text-success">¿Olvidó su contraseña?</a>
+            </div>
+
+            <button type="submit" class="btn-principal">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const badge = document.getElementById('badge-portal');
+
+        // Diferenciar portal mientras el usuario escribe
+        emailInput.addEventListener('input', (e) => {
+            const val = e.target.value.toLowerCase();
+            if (val.endsWith('@funeraria.cl')) {
+                badge.innerText = "PORTAL COLABORADORES (RRHH)";
+                badge.className = "portal-indicator bg-success text-white";
+            } else if (val.includes('@') && !val.endsWith('@funeraria.cl')) {
+                badge.innerText = "PORTAL CLIENTES";
+                badge.className = "portal-indicator bg-primary text-white";
+            } else {
+                badge.innerText = "IDENTIFICANDO PORTAL...";
+                badge.className = "portal-indicator bg-light text-muted";
+            }
+        });
+
+        document.getElementById('unified-login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = emailInput.value.toLowerCase();
+
+            // Simulación de validación ( feedback Daniii)
+            if (email.endsWith('@funeraria.cl')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Acceso Correcto',
+                    text: 'Bienvenido al Panel Administrativo',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'rrhh/dashboard-rrhh.html';
+                });
+            } 
+            else if (email.match(/@(gmail|outlook|hotmail)\.com$/)) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sesión Iniciada',
+                    text: 'Redirigiendo a su área de cliente...',
+                    timer: 2000,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'clientes/dashboard-cliente.html';
+                });
+            } 
+            else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error de Acceso',
+                    text: 'El correo o la contraseña no son válidos para nuestros portales.',
+                    confirmButtonColor: '#2D6A4F'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
